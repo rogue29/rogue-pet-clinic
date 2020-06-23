@@ -34,12 +34,14 @@
                 <artifactId>maven-release-plugin</artifactId>
                 <version>2.5.3</version>
                 <configuration>
-                    <goals>deploy</goals>
+                    <goals>install</goals>
                     <autoVersionSubmodules>true</autoVersionSubmodules>
-                    <tagNameFormat>v@{project.version}</tagNameFormat>
                 </configuration>
             </plugin>
         </plugins>
     </build>
 
+    <scm>
+        <developerConnection>scm:git:https://github.com/rogue29/rogue-pet-clinic.git</developerConnection>
+    </scm>
 </project>
