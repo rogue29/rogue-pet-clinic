@@ -14,7 +14,7 @@
     </parent>
     <groupId>io.rogue</groupId>
     <artifactId>pet-clinic-parent</artifactId>
-    <version>0.0.2</version>
+    <version>0.0.3-SNAPSHOT</version>
     <name>rogue-pet-clinic</name>
     <description>Own Implementation of Spring Pet Clinic Project</description>
 
@@ -42,6 +42,6 @@
 
     <scm>
         <developerConnection>scm:git:https://github.com/rogue29/rogue-pet-clinic.git</developerConnection>
-      <tag>pet-clinic-parent-0.0.2</tag>
+      <tag>HEAD</tag>
   </scm>
 </project>
