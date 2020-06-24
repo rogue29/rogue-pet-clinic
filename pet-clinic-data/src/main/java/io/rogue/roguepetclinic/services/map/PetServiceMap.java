@@ -1,7 +1,7 @@
-package io.rogue.roguepetclinic.service.map;
+package io.rogue.roguepetclinic.services.map;
 
 import io.rogue.roguepetclinic.model.Pet;
-import io.rogue.roguepetclinic.service.CrudService;
+import io.rogue.roguepetclinic.services.CrudService;
 
 import java.util.Set;
 

@@ -1,4 +1,4 @@
-package io.rogue.roguepetclinic.service;
+package io.rogue.roguepetclinic.services;
 
 import io.rogue.roguepetclinic.model.Owner;
 
