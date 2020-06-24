@@ -18,6 +18,7 @@
             </tr>
         </thead>
         <tbody>
+            <!--/*@thymesVar id="vets" type="io.rogue.roguepetclinic.model.Vet"*/-->
             <tr th:each="vet : ${vets}">
                 <td th:text="${vet.id}">placeholder text</td>
                 <td th:text="${vet.firstName}">placeholder text</td>
