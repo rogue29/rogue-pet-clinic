@@ -1,4 +1,4 @@
-package io.rogue.roguepetclinic.service.map;
+package io.rogue.roguepetclinic.services.map;
 
 import java.util.HashMap;
 import java.util.HashSet;
