@@ -7,6 +7,23 @@
     <title>Owners Page</title>
 </head>
 <body>
-    <h1 th:text="'List Of Owners'">PLACEHOLDER TEXT</h1>
+<!--/*@thymesVar id="owner" type="io.rogue.roguepetclinic.model.Owner"*/-->
+    <h1>List of Owners</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>FIRST NAME</th>
+                <th>LAST NAME</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="owner : ${owners}">
+                <td th:text="${owner.id}">placeholder text</td>
+                <td th:text="${owner.firstName}">placeholder text</td>
+                <td th:text="${owner.lastName}">placeholder text</td>
+            </tr>
+        </tbody>
+    </table>
 </body>
 </html>
