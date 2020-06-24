@@ -1,11 +1,13 @@
 package io.rogue.roguepetclinic.services.map;
 
 import io.rogue.roguepetclinic.model.Vet;
-import io.rogue.roguepetclinic.services.CrudService;
+import io.rogue.roguepetclinic.services.VetService;
+import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
-public class VetServiceMap extends AbstractServiceMap<Vet, Long> implements CrudService<Vet, Long> {
+@Service
+public class VetServiceMap extends AbstractServiceMap<Vet, Long> implements VetService {
     @Override
     public Vet findById(Long id) {
         return super.findById(id);
