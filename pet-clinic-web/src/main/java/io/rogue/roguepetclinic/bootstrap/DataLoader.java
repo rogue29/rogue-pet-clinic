@@ -1,6 +1,7 @@
 package io.rogue.roguepetclinic.bootstrap;
 
 import io.rogue.roguepetclinic.model.Owner;
+import io.rogue.roguepetclinic.model.Pet;
 import io.rogue.roguepetclinic.model.PetType;
 import io.rogue.roguepetclinic.model.Vet;
 import io.rogue.roguepetclinic.services.OwnerService;
@@ -10,6 +11,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+
+import static java.time.LocalDate.now;
 
 @Component
 public class DataLoader implements CommandLineRunner {
@@ -40,12 +43,28 @@ public class DataLoader implements CommandLineRunner {
         owner1.setFirstName("Akash");
         owner1.setLastName("Ahuja");
 
+        Pet akashpet = new Pet();
+        akashpet.setPetType(savedDog);
+        akashpet.setName("BowBow");
+        akashpet.setOwner(owner1);
+        akashpet.setBirthDate(now());
+
+        owner1.getPets().add(akashpet);
+
         ownerService.save(owner1);
 
         Owner owner2 = new Owner();
         owner2.setId(2L);
         owner2.setFirstName("Bob");
         owner2.setLastName("Bell");
+
+        Pet bobPet = new Pet();
+        bobPet.setPetType(cat);
+        bobPet.setName("MeowMeow");
+        bobPet.setOwner(owner2);
+        bobPet.setBirthDate(now());
+
+        owner2.getPets().add(bobPet);
 
         ownerService.save(owner2);
 
