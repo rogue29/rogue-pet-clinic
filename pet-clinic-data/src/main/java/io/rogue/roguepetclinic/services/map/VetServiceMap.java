@@ -1,6 +1,8 @@
 package io.rogue.roguepetclinic.services.map;
 
+import io.rogue.roguepetclinic.model.Speciality;
 import io.rogue.roguepetclinic.model.Vet;
+import io.rogue.roguepetclinic.services.SpecialityService;
 import io.rogue.roguepetclinic.services.VetService;
 import org.springframework.stereotype.Service;
 
@@ -8,6 +10,12 @@ import java.util.Set;
 
 @Service
 public class VetServiceMap extends AbstractServiceMap<Vet, Long> implements VetService {
+    private final SpecialityService specialityService;
+
+    public VetServiceMap(SpecialityService specialityService) {
+        this.specialityService = specialityService;
+    }
+
     @Override
     public Vet findById(Long id) {
         return super.findById(id);
@@ -30,6 +38,18 @@ public class VetServiceMap extends AbstractServiceMap<Vet, Long> implements VetS
 
     @Override
     public Vet save(Vet vet) {
-        return super.save(vet);
+        if (vet != null) {
+            if (!vet.getSpecialities().isEmpty()) {
+                vet.getSpecialities().forEach(speciality -> {
+                    if (speciality.getId() == null) {
+                        Speciality savedSpeciality = specialityService.save(speciality);
+                        speciality.setId(savedSpeciality.getId());
+                    }
+                });
+            }
+            return super.save(vet);
+        }
+
+        return null;
     }
 }

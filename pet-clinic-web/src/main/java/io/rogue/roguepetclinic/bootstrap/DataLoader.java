@@ -1,11 +1,9 @@
 package io.rogue.roguepetclinic.bootstrap;
 
-import io.rogue.roguepetclinic.model.Owner;
-import io.rogue.roguepetclinic.model.Pet;
-import io.rogue.roguepetclinic.model.PetType;
-import io.rogue.roguepetclinic.model.Vet;
+import io.rogue.roguepetclinic.model.*;
 import io.rogue.roguepetclinic.services.OwnerService;
 import io.rogue.roguepetclinic.services.PetTypeService;
+import io.rogue.roguepetclinic.services.SpecialityService;
 import io.rogue.roguepetclinic.services.VetService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,23 +18,56 @@ public class DataLoader implements CommandLineRunner {
     private final OwnerService ownerService;
     private final VetService vetService;
     private final PetTypeService petTypeService;
+    private final SpecialityService specialityService;
 
-    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService) {
+    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService, SpecialityService specialityService) {
         this.ownerService = ownerService;
         this.vetService = vetService;
         this.petTypeService = petTypeService;
+        this.specialityService = specialityService;
     }
 
     @Override
     public void run(String... args) throws Exception {
+        if (petTypeService.findAll().isEmpty()) {
+            loadVetsWithSpecialities();
+            loadOwnersWithPets();
+        }
+    }
 
+    private void loadVetsWithSpecialities() {
+        Speciality radiology = new Speciality();
+        radiology.setDescription("radiology");
+        Speciality savedRadiology = specialityService.save(radiology);
+
+        Speciality surgery = new Speciality();
+        surgery.setDescription("surgery");
+        Speciality savedSurgery = specialityService.save(surgery);
+
+        Vet vet1 = new Vet();
+        vet1.setId(1L);
+        vet1.setFirstName("Catherine");
+        vet1.setLastName("Calcutta");
+        vet1.getSpecialities().add(savedRadiology);
+        vetService.save(vet1);
+
+        Vet vet2 = new Vet();
+        vet2.setId(2L);
+        vet2.setFirstName("Dan");
+        vet2.setLastName("Dsouza");
+        vet2.getSpecialities().add(savedSurgery);
+        vetService.save(vet2);
+
+        log.info("#####Saved Vets#####");
+    }
+
+    private void loadOwnersWithPets() {
         PetType dog = new PetType();
         dog.setName("Dog");
         PetType savedDog = petTypeService.save(dog);
 
         PetType cat = new PetType();
         cat.setName("Cat");
-        PetType savedCat = petTypeService.save(cat);
 
         Owner owner1 = new Owner();
         owner1.setId(1L);
@@ -69,21 +100,5 @@ public class DataLoader implements CommandLineRunner {
         ownerService.save(owner2);
 
         log.info("#####Saved Owners#####");
-
-        Vet vet1 = new Vet();
-        vet1.setId(1L);
-        vet1.setFirstName("Catherine");
-        vet1.setLastName("Calcutta");
-
-        vetService.save(vet1);
-
-        Vet vet2 = new Vet();
-        vet2.setId(2L);
-        vet2.setFirstName("Dan");
-        vet2.setLastName("Dsouza");
-
-        vetService.save(vet2);
-
-        log.info("#####Saved Vets#####");
     }
 }
