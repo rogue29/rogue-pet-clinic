@@ -1,8 +1,10 @@
 package io.rogue.roguepetclinic.bootstrap;
 
 import io.rogue.roguepetclinic.model.Owner;
+import io.rogue.roguepetclinic.model.PetType;
 import io.rogue.roguepetclinic.model.Vet;
 import io.rogue.roguepetclinic.services.OwnerService;
+import io.rogue.roguepetclinic.services.PetTypeService;
 import io.rogue.roguepetclinic.services.VetService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,14 +16,25 @@ public class DataLoader implements CommandLineRunner {
     private final Logger log = LoggerFactory.getLogger(getClass().getSimpleName());
     private final OwnerService ownerService;
     private final VetService vetService;
+    private final PetTypeService petTypeService;
 
-    public DataLoader(OwnerService ownerService, VetService vetService) {
+    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService) {
         this.ownerService = ownerService;
         this.vetService = vetService;
+        this.petTypeService = petTypeService;
     }
 
     @Override
     public void run(String... args) throws Exception {
+
+        PetType dog = new PetType();
+        dog.setName("Dog");
+        PetType savedDog = petTypeService.save(dog);
+
+        PetType cat = new PetType();
+        cat.setName("Cat");
+        PetType savedCat = petTypeService.save(cat);
+
         Owner owner1 = new Owner();
         owner1.setId(1L);
         owner1.setFirstName("Akash");
