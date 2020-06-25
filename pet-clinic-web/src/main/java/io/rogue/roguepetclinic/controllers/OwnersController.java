@@ -18,6 +18,6 @@ public class OwnersController {
     @GetMapping({"", "/"})
     public String listOwners(Model model) {
         model.addAttribute("owners", service.findAll());
-        return "owners/index";
+        return "owners/ownersList";
     }
 }

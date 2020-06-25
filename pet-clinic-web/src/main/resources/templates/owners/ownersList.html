@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+<html xmlns:th="https://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'owners')}">
+
+<body>
+<h2>Owners</h2>
+<table id="owners" class="table table-striped">
+    <thead>
+    <tr>
+        <th style="width: 150px;">ID</th>
+        <th style="width: 150px;">FIRST NAME</th>
+        <th style="width: 150px;">LAST NAME</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!--/*@thymesVar id="owners" type="io.rogue.roguepetclinic.model.Owner"*/-->
+    <tr th:each="owner : ${owners}">
+        <!--/*@thymesVar id="owner" type="io.rogue.roguepetclinic.model.Owner"*/-->
+        <td th:text="${owner.id}">placeholder text</td>
+        <td th:text="${owner.firstName}">placeholder text</td>
+        <td th:text="${owner.lastName}">placeholder text</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

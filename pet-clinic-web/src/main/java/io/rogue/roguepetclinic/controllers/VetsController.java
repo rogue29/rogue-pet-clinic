@@ -18,6 +18,6 @@ public class VetsController {
     @GetMapping({"", "/"})
     public String listVets(Model model) {
         model.addAttribute("vets", service.findAll());
-        return "vets/index";
+        return "vets/vetList";
     }
 }
