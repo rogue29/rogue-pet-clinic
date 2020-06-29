@@ -1,10 +1,7 @@
 package io.rogue.roguepetclinic.bootstrap;
 
 import io.rogue.roguepetclinic.model.*;
-import io.rogue.roguepetclinic.services.OwnerService;
-import io.rogue.roguepetclinic.services.PetTypeService;
-import io.rogue.roguepetclinic.services.SpecialityService;
-import io.rogue.roguepetclinic.services.VetService;
+import io.rogue.roguepetclinic.services.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -19,12 +16,15 @@ public class DataLoader implements CommandLineRunner {
     private final VetService vetService;
     private final PetTypeService petTypeService;
     private final SpecialityService specialityService;
+    private final VisitService visitService;
 
-    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService, SpecialityService specialityService) {
+    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService,
+                      SpecialityService specialityService, VisitService visitService) {
         this.ownerService = ownerService;
         this.vetService = vetService;
         this.petTypeService = petTypeService;
         this.specialityService = specialityService;
+        this.visitService = visitService;
     }
 
     @Override
@@ -98,6 +98,12 @@ public class DataLoader implements CommandLineRunner {
         owner2.getPets().add(bobPet);
 
         ownerService.save(owner2);
+
+        Visit meowVisit = new Visit();
+        meowVisit.setPet(bobPet);
+        meowVisit.setDate(now());
+        meowVisit.setDescription("Sneezy Kitty");
+        visitService.save(meowVisit);
 
         log.info("#####Saved Owners#####");
     }
