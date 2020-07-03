@@ -4,10 +4,12 @@ import io.rogue.roguepetclinic.model.Speciality;
 import io.rogue.roguepetclinic.model.Vet;
 import io.rogue.roguepetclinic.services.SpecialityService;
 import io.rogue.roguepetclinic.services.VetService;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
+@Profile({"default", "map"})
 @Service
 public class VetServiceMap extends AbstractServiceMap<Vet, Long> implements VetService {
     private final SpecialityService specialityService;

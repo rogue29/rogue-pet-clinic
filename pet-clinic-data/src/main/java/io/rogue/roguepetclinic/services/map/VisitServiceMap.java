@@ -2,10 +2,12 @@ package io.rogue.roguepetclinic.services.map;
 
 import io.rogue.roguepetclinic.model.Visit;
 import io.rogue.roguepetclinic.services.VisitService;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
+@Profile({"default", "map"})
 @Service
 public class VisitServiceMap extends AbstractServiceMap<Visit, Long> implements VisitService {
     @Override
