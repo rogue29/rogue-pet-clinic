@@ -5,10 +5,12 @@ import io.rogue.roguepetclinic.model.Pet;
 import io.rogue.roguepetclinic.services.OwnerService;
 import io.rogue.roguepetclinic.services.PetService;
 import io.rogue.roguepetclinic.services.PetTypeService;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
+@Profile({"default", "map"})
 @Service
 public class OwnerServiceMap extends AbstractServiceMap<Owner, Long> implements OwnerService {
     private final PetService petService;
@@ -66,6 +68,10 @@ public class OwnerServiceMap extends AbstractServiceMap<Owner, Long> implements 
 
     @Override
     public Owner findByLastName(String lastName) {
-        return null;
+        return findAll()
+            .stream()
+            .filter(owner -> lastName.equalsIgnoreCase(owner.getLastName()))
+            .findFirst()
+            .orElse(null);
     }
 }
